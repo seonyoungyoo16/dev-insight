@@ -1,0 +1,95 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "dev-insight Contest Board API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/contests": {
+      "get": {
+        "operationId": "listContests",
+        "summary": "Read the current contest board",
+        "x-code": {
+          "caller": "public/board.js",
+          "adapter": "public/contest-api.js",
+          "handler": "app.py:Handler.do_GET",
+          "response": "app.py:Board.view",
+          "integrationTest": "tests/test_api_http.py:ContestHttpTests.test_contests_get_returns_current_board_state"
+        },
+        "responses": {
+          "200": {
+            "description": "Current board snapshot",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BoardState" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/refresh": {
+      "post": {
+        "operationId": "refreshContests",
+        "summary": "Request a refresh and read the current board",
+        "x-code": {
+          "caller": "public/board.js",
+          "adapter": "public/contest-api.js",
+          "handler": "app.py:Handler.do_POST",
+          "response": "app.py:Board.view",
+          "integrationTest": "tests/test_api_http.py:ContestHttpTests.test_refresh_post_preserves_accepted_and_invalid_content_responses"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "type": "object", "additionalProperties": false },
+              "example": {}
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Refresh accepted; current board snapshot",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BoardState" }
+              }
+            }
+          },
+          "403": { "description": "Request does not originate from the local board" },
+          "415": { "description": "Request does not use the expected JSON media type and body size" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BoardState": {
+        "type": "object",
+        "required": ["sources", "contests", "running", "today"],
+        "properties": {
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["key", "name", "url", "count", "images", "state"],
+              "properties": {
+                "key": { "type": "string" },
+                "name": { "type": "string" },
+                "url": { "type": "string" },
+                "count": { "type": "integer", "minimum": 0 },
+                "images": { "type": "integer", "minimum": 0 },
+                "state": { "type": "string" },
+                "message": { "type": ["string", "null"] }
+              }
+            }
+          },
+          "contests": { "type": "array", "items": { "type": "object" } },
+          "running": { "type": "boolean" },
+          "today": { "type": "string", "format": "date" }
+        }
+      }
+    }
+  }
+}

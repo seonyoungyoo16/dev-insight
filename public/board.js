@@ -393,11 +393,9 @@
     const current = ++requestId;
     if (refreshRequested) refresh.disabled = true;
     try {
-      const response = refreshRequested
-        ? await fetch("/api/refresh", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })
-        : await fetch("/api/contests");
-      if (!response.ok) throw new Error("Unable to load contests");
-      const state = await response.json();
+      const state = refreshRequested
+        ? await window.contestApi.refreshContests()
+        : await window.contestApi.listContests();
       if (current !== requestId) return;
       showBoard(state);
       timer = window.setTimeout(loadBoard, nextBoardCheck(state));

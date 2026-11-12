@@ -30,11 +30,13 @@ class Page:
 
 PAGES = {
     "/": Page("개발 공모전", "index.html", "접수 중인 개발 공모전, 포스터, 접수기간과 상금 검색",
-              ("/board.css",), ("/board.js",)),
+              ("/board.css",), ("/contest-api-routes.js", "/contest-api.js", "/board.js")),
 }
 STATIC = {
     "/shell.css": ("shell.css", "text/css; charset=utf-8"),
     "/board.css": ("board.css", "text/css; charset=utf-8"),
+    "/contest-api-routes.js": ("contest-api-routes.js", "application/javascript; charset=utf-8"),
+    "/contest-api.js": ("contest-api.js", "application/javascript; charset=utf-8"),
     "/board.js": ("board.js", "application/javascript; charset=utf-8"),
 }
 IMAGE_TYPES = {"jpg": "image/jpeg", "png": "image/png", "webp": "image/webp", "gif": "image/gif", "avif": "image/avif"}

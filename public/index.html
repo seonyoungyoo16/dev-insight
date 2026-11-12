@@ -1,0 +1,60 @@
+<div id="contest-board">
+  <header class="contest-toolbar">
+    <div class="contest-heading">
+      <h1>개발 공모전</h1>
+      <p>접수 중인 공고</p>
+    </div>
+    <div class="contest-actions">
+      <a href="https://www.onoffmix.com/event/main/?c=105" target="_blank" rel="noopener noreferrer">온오프믹스 목록 ↗</a>
+      <button class="contest-refresh" type="button">수집 새로고침</button>
+    </div>
+  </header>
+  <section class="contest-window" aria-label="공모전 목록">
+    <div class="contest-controls">
+      <label class="contest-search">
+        <span class="contest-search-icon" aria-hidden="true"></span>
+        <input type="search" aria-label="공모전 검색" placeholder="공모전명, 주최 기관, 키워드 검색">
+      </label>
+      <label class="contest-source-filter">
+        <span>출처</span>
+        <select aria-label="출처"><option value="">전체</option></select>
+      </label>
+      <button class="contest-columns-toggle" type="button" aria-pressed="false">전체 열</button>
+    </div>
+    <div class="contest-summary">
+      <span class="contest-count" aria-live="polite"></span>
+      <div class="contest-summary-actions">
+        <button class="contest-reset" type="button" hidden>필터 초기화</button>
+        <button class="contest-mobile-sort" type="button">마감 가까운 순</button>
+      </div>
+    </div>
+    <p class="contest-collection" role="status" hidden></p>
+    <div class="contest-data">
+      <div class="contest-scroll" role="region" aria-label="공모전 표 가로 스크롤" tabindex="0">
+        <table role="table" aria-label="공모전 목록">
+          <thead role="rowgroup"><tr role="row"></tr></thead>
+          <tbody role="rowgroup"></tbody>
+        </table>
+      </div>
+      <section class="contest-menu" aria-labelledby="contest-menu-title" hidden>
+        <div class="contest-menu-heading">
+          <h2 id="contest-menu-title"></h2>
+          <button type="button" class="contest-close" aria-label="닫기">×</button>
+        </div>
+        <div class="contest-sort">
+          <button type="button" data-sort="asc">↑ 오름차순</button>
+          <button type="button" data-sort="desc">↓ 내림차순</button>
+        </div>
+        <fieldset>
+          <legend>표시할 값</legend>
+          <div class="contest-options"></div>
+        </fieldset>
+        <button class="contest-apply" type="button">필터 적용</button>
+      </section>
+    </div>
+  </section>
+  <details class="contest-coverage">
+    <summary>사이트별 수집 상태</summary>
+    <ul class="contest-sources"></ul>
+  </details>
+</div>

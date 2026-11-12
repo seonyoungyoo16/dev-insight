@@ -1,0 +1,58 @@
+:root {
+  color-scheme: light dark;
+  --surface: light-dark(#ffffff, #171f2e);
+  --canvas: light-dark(#f1f5fb, #101824);
+  --header: light-dark(#f6f8fc, #222f43);
+  --edge: light-dark(#d5deec, #37465d);
+  --ink: light-dark(#172339, #f1f5fb);
+  --secondary: light-dark(#475771, #b3c0d5);
+  --brand: light-dark(#244eb7, #a7c3ff);
+  --tint: light-dark(#eaf0ff, #243759);
+  --on-brand: light-dark(#ffffff, #12254d);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font: 14px/1.48 "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+}
+a { color: var(--brand); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+.app-shell { display: grid; grid-template-columns: 165px minmax(0, 1fr); min-height: 100dvh; }
+.app-sidebar { background: var(--surface); border-inline-end: 1px solid var(--edge); }
+.app-content { min-width: 0; width: 100%; max-width: 1520px; padding: 24px clamp(14px, 2.4vw, 28px); }
+.app-brand { display: flex; align-items: center; gap: 8px; padding: 23px 13px 16px; font-size: 15px; font-weight: 720; }
+.app-brand svg { color: var(--brand); flex: none; }
+.app-nav { padding: 8px 9px; }
+.app-nav p { margin: 0 6px 5px; color: var(--secondary); font-size: 12px; }
+.app-nav ul { display: grid; gap: 4px 6px; margin: 0; padding: 0; list-style: none; }
+.app-nav a {
+  display: flex; align-items: center; min-height: 38px; padding: 7px 10px;
+  border-radius: 6px; color: var(--ink); text-decoration: none; overflow-wrap: anywhere;
+}
+.app-nav a:is(:hover, [aria-current="page"]) { background: var(--tint); color: var(--brand); }
+.app-nav a[aria-current="page"] { font-weight: 700; }
+.app-skip { position: absolute; inset: 4px auto auto 10px; }
+.app-skip:not(:focus) { width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.app-skip:focus { background: var(--surface); padding: 8px; z-index: 4; }
+
+@media (max-width: 850px) {
+  .app-shell { display: block; }
+  .app-sidebar { border-inline-end: 0; border-bottom: 1px solid var(--edge); }
+  .app-brand { padding: 11px 12px 4px; }
+  .app-nav { padding: 4px 12px 10px; }
+  .app-nav p { margin-inline: 0; }
+  .app-nav ul { display: flex; flex-wrap: wrap; }
+}
+
+@media (max-width: 635px) {
+  .app-content { padding: 16px 9px; }
+}
+
+@media (pointer: coarse) {
+  .app-nav a { min-height: 44px; }
+}
